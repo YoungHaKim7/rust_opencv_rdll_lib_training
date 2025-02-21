@@ -1,11 +1,18 @@
 # rust_opencv_training
 
-#  Creating A DLL With Rust
+# link
+
+- [Creating A DLL With Rust]()
+
+
+<hr />
+
+#  Creating A DLL With Rust[|🔝|](#link)
 - https://samrambles.com/guides/window-hacking-with-rust/creating-a-dll-with-rust/index.html#wait-what
 
 <hr />
 
-# Windows dll 분석
+# Windows dll 분석[|🔝|](#link)
 - https://users.rust-lang.org/t/rustc-windows-how-to-specify-dllexport-for-staticlib-functions/97296/4
 - https://github.com/mesonbuild/meson/tree/master/test%20cases/rust/15%20polyglot%20sharedlib
 
@@ -25,3 +32,40 @@ addertest.c.obj : error LNK2019: unresolved external symbol __imp_adder_add refe
 addertest.exe : fatal error LNK1120: 1 unresolved externals
 ninja: build stopped: subcommand failed.
 ```
+
+# How to use .dll libs created by rust[|🔝|](#link)
+- https://users.rust-lang.org/t/how-to-use-dll-libs-created-by-rust/19279
+
+
+```rs
+use std::thread;
+
+#[no_mangle]
+pub extern fn process(count: usize) {
+    let handles: Vec<_> = (0..count).map(|_| {
+        thread::spawn(|| {
+            let mut x = 0;
+            for _ in 0..5_000_000 {
+                x += 1
+            }
+            x
+        })
+    }).collect();
+
+    for h in handles {
+        println!("Thread finished with count={}",
+        h.join().map_err(|_| "Could not join a thread!").unwrap());
+    }
+}
+```
+
+
+```toml
+[lib]
+name = "dlltest"
+crate-type = ["dylib"]
+```
+
+
+<hr />
+

@@ -2,7 +2,7 @@
 
 # link
 
-- [Creating A DLL With Rust]()
+- [Creating A DLL With Rust](#creating-a-dll-with-rust)
 
 
 <hr />

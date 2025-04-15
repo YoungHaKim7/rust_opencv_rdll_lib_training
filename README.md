@@ -7,6 +7,10 @@
 
 <hr />
 
+# Rust로 연습 OpenCV
+- https://github.com/YoungHaKim7/rust_opencv
+
+
 #  Creating A DLL With Rust[|🔝|](#link)
 - https://samrambles.com/guides/window-hacking-with-rust/creating-a-dll-with-rust/index.html#wait-what
 
